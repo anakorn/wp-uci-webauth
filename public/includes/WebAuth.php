@@ -21,7 +21,7 @@ class WebAuth
     // These are the defined vars from login.uci.edu
     public $time_created = 0;
     public $ucinetid = '';
-    public $campus_id = '';
+    public $campusid = '';
     public $age_in_seconds = 0;
     public $max_idle_time = 0;
     public $auth_fail = '';
@@ -79,7 +79,7 @@ class WebAuth
 
         // Modify the various login.uci.edu URLs with our return URL
         $this->login_url .= '?return_url=' . urlencode($this->url);
-        $this->logout_url .= '?return_url=' . urlencode($this->url);
+        // $this->logout_url .= '?return_url=' . urlencode($this->url);
 
         // Let's add the cookie called 'ucinetid_auth'
         if (isset($cookie_vars_array['ucinetid_auth']) && $cookie_vars_array['ucinetid_auth']) {
@@ -141,8 +141,8 @@ class WebAuth
     }
 
     // The logout function
-    public function logout() {
-        print Header('Location: ' . $this->logout_url);
+    public function logout($return_url) {
+        print Header('Location: ' . $this->logout_url . '?return_url=' . urlencode($return_url));
         exit;
     }
 
