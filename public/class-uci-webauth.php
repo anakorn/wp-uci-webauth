@@ -71,6 +71,9 @@ class UCI_WebAuth {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
+		require_once( plugin_dir_path( __FILE__ ) . 'includes/uci-webauth-adapter.php' );
+		add_filter( 'authenticate', array( 'UCI_WebAuth_Adapter', 'authenticate' ), 10, 3 );
+
 	}
 
 	/**
