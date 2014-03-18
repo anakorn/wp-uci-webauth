@@ -21,7 +21,7 @@ class WebAuth
     // These are the defined vars from login.uci.edu
     public $time_created = 0;
     public $ucinetid = '';
-    public $campusid = '';
+    public $campus_id = '';
     public $age_in_seconds = 0;
     public $max_idle_time = 0;
     public $auth_fail = '';

@@ -16,6 +16,7 @@ class UCI_WebAuth_Adapter {
     require_once( 'WebAuth.php' );
     $auth = new WebAuth();
 
+    // Redirect user to WP homepage after logging out.
     $want_logout = $GLOBALS['_GET']['loggedout'] === 'true';
     if ( $want_logout ) {
       $auth->logout( get_home_url() );
@@ -28,14 +29,13 @@ class UCI_WebAuth_Adapter {
     }
 
     // Deny access if user is not of a particular affiliation.
-    if ( strpos( $auth->uci_affiliations, 'student' ) === false ) {
+    if ( strpos( $auth->uci_affiliations, 'faculty' ) === false ) {
 
       if ( wp_get_referer() ) {
         wp_safe_redirect( wp_get_referer() );
       } else {
         wp_safe_redirect( get_home_url() );
       }
-
     } else {
 
       // Check if user exists in WP db (by their campus_id).
@@ -53,7 +53,6 @@ class UCI_WebAuth_Adapter {
         $user = new WP_User( $user_id );
 
       }
-
     }
 
     // Prevent WordPress from using its default authentication.
